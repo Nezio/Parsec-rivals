@@ -5,18 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float thrust;
-    public Camera c;
 
-    private Rigidbody2D rb2d;
+    private Rigidbody2D rb;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-
-        //Camera c = GetComponent<Camera>();
-        Debug.Log("aspect: " + c.aspect);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate ()
@@ -24,8 +20,8 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        rb2d.AddForce(transform.up * vertical * thrust);
-        rb2d.AddTorque(-horizontal);
+        rb.AddForce(transform.up * vertical * thrust);
+        rb.AddTorque(-horizontal);
 
     }
 
