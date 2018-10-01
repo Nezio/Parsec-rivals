@@ -25,8 +25,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Ctrl key (fire1) doesn't work with some movement keys at the same time - only in Unity editor; build works
-        if (Input.GetButton("Fire3") && nextFire < Time.time)
+        // Ctrl key doesn't work with some movement keys at the same time - only in Unity editor; build works
+        if (Input.GetKey(KeyCode.LeftShift) && nextFire < Time.time)
         {
             nextFire = Time.time + fireRate;
             Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
@@ -36,11 +36,22 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate ()
     {
-        float vertical = Input.GetAxis("Vertical");
-        float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
+        //float horizontal = Input.GetAxis("Horizontal");
 
-        rb.AddForce(transform.up * vertical * thrust);
-        rb.AddTorque(-horizontal);
+        //rb.AddForce(transform.up * vertical * thrust);
+        //rb.AddTorque(-horizontal);
+
+
+        if (Input.GetKey(KeyCode.W))
+            rb.AddForce(transform.up * thrust);
+        if (Input.GetKey(KeyCode.S))
+            rb.AddForce(transform.up * thrust * -0.5f);
+        if (Input.GetKey(KeyCode.A))
+            rb.AddTorque(1);
+        if (Input.GetKey(KeyCode.D))
+            rb.AddTorque(-1);
+
 
     }
     

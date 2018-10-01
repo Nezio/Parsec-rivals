@@ -16,6 +16,13 @@ public class BulletCollisionCheck : MonoBehaviour
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * ballHitForce);
         }
 
+        // if bullet collides with player ignore collision (don't destroy bullet)
+        if(collision.gameObject.tag == "Player")
+        {
+            return;
+        }
+
+
         Destroy(gameObject);
     }
 

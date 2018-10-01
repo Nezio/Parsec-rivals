@@ -64,6 +64,7 @@
     <Compile Include="Assets\Auto Letterbox\ForceCameraRatio.cs" />
     <Compile Include="Assets\Scripts\BulletCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\MoveForward.cs" />
+    <Compile Include="Assets\Scripts\P2Controller.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Development/Unity/Parsec rivals/Parsec rivals/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
