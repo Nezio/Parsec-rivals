@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float thrust;
+    public float yawThrust;
     public float fireRate;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
@@ -48,9 +49,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
             rb.AddForce(transform.up * thrust * -0.5f);
         if (Input.GetKey(KeyCode.A))
-            rb.AddTorque(1);
+            rb.AddTorque(yawThrust);
         if (Input.GetKey(KeyCode.D))
-            rb.AddTorque(-1);
+            rb.AddTorque(-yawThrust);
 
 
     }
