@@ -22,6 +22,12 @@ public class BulletCollisionCheck : MonoBehaviour
             return;
         }
 
+        // if bullet collides with goal ignore collision (don't destroy bullet)
+        if(collision.gameObject.tag.Contains("Goal"))
+        {
+            return;
+        }
+
 
         Destroy(gameObject);
     }

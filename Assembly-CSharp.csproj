@@ -62,7 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Auto Letterbox\ForceCameraRatio.cs" />
+    <Compile Include="Assets\Scripts\BallCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\BulletCollisionCheck.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\MoveForward.cs" />
     <Compile Include="Assets\Scripts\P2Controller.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
