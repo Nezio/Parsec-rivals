@@ -4,31 +4,20 @@ using UnityEngine;
 
 public class BallCollisionCheck : MonoBehaviour
 {
+    public GameObject gameController;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO:
-        // on goal
-            // inc score
-            // enter cooldown (pause timer; play score animations; countdown to next round)
-            // slowdown?
-            // destroy ball (or move/reset pos, rot, velocity and hide)
-
-        // on round start
-            // start timer
-            // reset ball
-            // reset players
-
-
-        // team 2 scored
+        // collided with goal1 -> team 2 scored
         if (collision.gameObject.tag == "Goal1")
         {
-            Debug.Log("g1");
+            gameController.GetComponent<GameController>().Goal(2);
         }
 
-        // team 2 scored
+        // collided with goal2 -> team 1 scored
         if (collision.gameObject.tag == "Goal2")
         {
-            Debug.Log("g2");
+            gameController.GetComponent<GameController>().Goal(1);
         }
     }
 }
