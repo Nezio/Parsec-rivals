@@ -12,8 +12,6 @@ public class MatchTimer : MonoBehaviour
     private Text timerText;
     private int pastTimerSecond;
 
-    // TODO: timer starts paused
-
     private void Start()
     {
         currentTimerTime = matchLength * 60;

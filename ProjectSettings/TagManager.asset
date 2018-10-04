@@ -9,6 +9,7 @@ TagManager:
   - Goal2
   - PlayerSpawnPoint
   - BallSpawnPoint
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -48,4 +49,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 229578605
     locked: 0

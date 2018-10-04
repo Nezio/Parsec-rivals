@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     public Text team2ScoreText;
     public GameObject Ball;
     [Tooltip("Reference to a game object that has MatchTimer script attached.")]
-    public GameObject timeText;
+    public MatchTimer matchTimer;
     public GameObject player1;
     public GameObject player2;
     public GameObject countdown;
@@ -30,22 +30,22 @@ public class GameController : MonoBehaviour
 
     private void StartRound()
     {
-        PositionPlayers();
+        ResetPlayers();
 
-        // position ball
+        // reset ball position and velocity
         Ball.transform.SetPositionAndRotation(ballSpawnPoint.transform.position, ballSpawnPoint.transform.rotation);
+        Ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
-        // clear playing field (of bullets, powerups, etc.)
+        // clean up playing field (of bullets, powerups, etc.)
+        CleanUpField();
 
-        // freeze players (and other moving objects/events/timers) - time scale?
-        // countdown
-        // resume timer
+        // pause game, play countdown animation and unpause game
         StartCoroutine(Countdown());
    
     }
 
-    private void PositionPlayers()
-    {
+    private void ResetPlayers()
+    { // resets player position and velocity
         List<int> usedSpawns = new List<int>();
 
         int numberOfPlayers = 2;
@@ -85,7 +85,11 @@ public class GameController : MonoBehaviour
             );
             Quaternion mirroredRotation = Quaternion.Euler(new Vector3(0, 0, playerSpawnPoints[spawnIndex].transform.localEulerAngles.z + 180));
             team2Players[i].transform.SetPositionAndRotation(mirroredPosition, mirroredRotation);
-            
+
+
+            // reset velocity
+            team1Players[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            team2Players[i].GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
     }
     
@@ -95,8 +99,8 @@ public class GameController : MonoBehaviour
         
         UpdateScores(teamWhoScored);
 
-        // pause timer
-        timeText.GetComponent<MatchTimer>().pauseTimer = true;
+        // pause timer only
+        matchTimer.pauseTimer = true;
 
         // score animations and slowdown
 
@@ -120,27 +124,46 @@ public class GameController : MonoBehaviour
         team2ScoreText.text = team2Score.ToString();
     }
 
-    IEnumerator Countdown()
+    public void PauseGame()
     {
         Time.timeScale = 0;
-        countdown.SetActive(true);
+        matchTimer.pauseTimer = true;     // just in case
+    }
 
-        float pauseTime = Time.realtimeSinceStartup + 2f;
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;             // unpause game
+        matchTimer.pauseTimer = false;     // unpause timer (timer starts paused to prevent 04:59 on start)
+    }
+
+    IEnumerator Countdown()
+    { // pause game, play countdown animation and unpause game
+        countdown.SetActive(true);      // enable animation gameobject
+        PauseGame();             // pause game (animation won't stop because it's using unscaled time)
+        
+        Animator anmtr = countdown.GetComponent<Animator>();    // get animation length
+        var animLength = anmtr.GetCurrentAnimatorStateInfo(0).length;
+        
+        float pauseTime = Time.realtimeSinceStartup + animLength;
         while (Time.realtimeSinceStartup < pauseTime)
             yield return 0;
 
-
-        //animation.Play("die");
-        //yield WaitForSeconds(animation["die"].length);
-        //Destroy(this.gameObject); //destroys the object after animation ended
-
-        // yield return new WaitForSeconds(2);
-
-        Time.timeScale = 1;
-        countdown.SetActive(false);
-        timeText.GetComponent<MatchTimer>().pauseTimer = false;
+        countdown.SetActive(false);     // disable animation gameobject
+        UnpauseGame();      // unneeded, but just in case; animation unpauses game
     }
 
+    private void CleanUpField()
+    {
+        // clean up bullets
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
+        {
+            Destroy(bullet);
+        }
+    }
 
+    public void ShowScoresScreen()
+    {
+
+    }
 
 }
