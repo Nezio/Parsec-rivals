@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Anim_UnpauseGame : MonoBehaviour
 {
-    public GameController gameController;
+    public GameManager gameManager;
 
     public void AnimationUnpause()
     {
-        gameController.UnpauseGame();
+        gameManager.UnpauseGame();
     }
 	
 }

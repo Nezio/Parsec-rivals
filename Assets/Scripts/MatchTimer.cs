@@ -7,6 +7,8 @@ public class MatchTimer : MonoBehaviour
 {
     public int matchLength = 5;         // how long doeas a match last (in minutes)
     public bool pauseTimer = false;
+    public bool countUp = false;
+    public GameManager gameManager;
 
     private float currentTimerTime;       // current time to display on timer (in seconds)
     private Text timerText;
@@ -15,6 +17,7 @@ public class MatchTimer : MonoBehaviour
     private void Start()
     {
         currentTimerTime = matchLength * 60;
+        //currentTimerTime = 6;      // debug
         timerText = gameObject.GetComponent<Text>();
         pastTimerSecond = (int)currentTimerTime;
 
@@ -26,16 +29,36 @@ public class MatchTimer : MonoBehaviour
     {
         if(!pauseTimer)
         {
-            currentTimerTime -= Time.deltaTime;
-            if (currentTimerTime < 0)
-                currentTimerTime = 0;
+            if(countUp)
+            {
+                currentTimerTime += Time.deltaTime;
+            }
+            else
+            {
+                currentTimerTime -= Time.deltaTime;
+                if (currentTimerTime < 0)
+                    currentTimerTime = 0;
+            }
+            
 
             // avoid unnecessary gui draws
-            if(pastTimerSecond!= (int)currentTimerTime)
+            if(pastTimerSecond != (int)currentTimerTime)
             {
+                //Debug.Log("past:" + pastTimerSecond + "now: " + currentTimerTime);
+                if ((int)currentTimerTime == 0)
+                {
+                    if (gameManager.GetScores()[0] == gameManager.GetScores()[1])
+                        gameManager.EnterOvertime();
+                    else
+                        gameManager.EndMatch();
+                }
+                
+
                 pastTimerSecond = (int)currentTimerTime;
                 UpdateTimeText();
             }
+            
+            
                 
         }
         
