@@ -9,7 +9,7 @@ public class TeamColor : MonoBehaviour
     [Tooltip("Team 1 or team 2")]
     public int team;
 
-    private Color[] teamColors = new Color[2];
+    public Color[] teamColors = new Color[2];
 
     private void Start()
     {
@@ -19,8 +19,8 @@ public class TeamColor : MonoBehaviour
         teamColors[1] = Tools.Color0to1(255, 128, 0, 255);
         
         // debug colors
-        teamColors[0] = Tools.Color0to1(0, 0, 255, 255);
-        teamColors[1] = Tools.Color0to1(255, 0, 0, 255);
+        //teamColors[0] = Tools.Color0to1(0, 0, 255, 255);
+        //teamColors[1] = Tools.Color0to1(255, 0, 0, 255);
 
         SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
         Image image = gameObject.GetComponent<Image>();

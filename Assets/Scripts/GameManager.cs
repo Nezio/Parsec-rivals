@@ -19,17 +19,18 @@ public class GameManager : MonoBehaviour
     public Text scoresScreenScore2;
     public GameObject scoresScreen;
 
+    [HideInInspector]
+    public bool countingDown = false;
 
     private int team1Score = 0;
     private int team2Score = 0;
-    private GameObject ballSpawnPoint;
     private GameObject[] playerSpawnPoints;
     private bool overtime = false;
+    
 
     private void Start()
     {
         // initialization
-        ballSpawnPoint = GameObject.FindGameObjectWithTag("BallSpawnPoint");
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
 
         StartRound();
@@ -52,7 +53,8 @@ public class GameManager : MonoBehaviour
     private void ResetBall()
     {
         // reset ball position and velocity
-        Ball.transform.SetPositionAndRotation(ballSpawnPoint.transform.position, ballSpawnPoint.transform.rotation);
+        //Ball.transform.SetPositionAndRotation(ballSpawnPoint.transform.position, ballSpawnPoint.transform.rotation);  // previously used ball spawn point system
+        Ball.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         Ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         Ball.GetComponent<Rigidbody2D>().angularVelocity = 0;
     }
@@ -157,13 +159,14 @@ public class GameManager : MonoBehaviour
     public void UnpauseGame()
     {
         Time.timeScale = 1;             // unpause game
-        matchTimer.pauseTimer = false;     // unpause timer (timer starts paused to prevent 04:59 on start)
+        matchTimer.pauseTimer = false;  // unpause timer (timer starts paused to prevent 04:59 on start)
     }
 
     IEnumerator Countdown()
     { // pause game, play countdown animation and unpause game
         countdown.SetActive(true);      // enable animation gameobject
-        PauseGame();             // pause game (animation won't stop because it's using unscaled time)
+        PauseGame();                    // pause game (animation won't stop because it's using unscaled time)
+        countingDown = true;            // property to let other scripts know that countdown is in progress
         
         Animator anmtr = countdown.GetComponent<Animator>();    // get animation length
         var animLength = anmtr.GetCurrentAnimatorStateInfo(0).length;
@@ -173,7 +176,8 @@ public class GameManager : MonoBehaviour
             yield return 0;
 
         countdown.SetActive(false);     // disable animation gameobject
-        UnpauseGame();      // unneeded, but just in case; animation unpauses game
+        UnpauseGame();                  // unneeded, but just in case; animation unpauses game
+        countingDown = false;
     }
 
     private void CleanUpField()
