@@ -13,4 +13,9 @@ public static class Tools
     {
         return new Color(r / 255f, g / 255f, b / 255f, 1f);
     }
+
+    public static KeyCode GetKeycode(string key)
+    {
+        return (KeyCode)System.Enum.Parse(typeof(KeyCode), key);
+    }
 }

@@ -9,6 +9,7 @@ public class TeamColor : MonoBehaviour
     [Tooltip("Team 1 or team 2")]
     public int team;
 
+    [HideInInspector]
     public Color[] teamColors = new Color[2];
 
     private void Start()
