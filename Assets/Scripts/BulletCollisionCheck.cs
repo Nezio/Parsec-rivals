@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletCollisionCheck : MonoBehaviour
 {
     public float ballHitForce;
+    public GameObject particleExplosionPrefab;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,6 +29,9 @@ public class BulletCollisionCheck : MonoBehaviour
             return;
         }
 
+
+        // play particle explosion
+        Instantiate(particleExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
 
         Destroy(gameObject);
     }

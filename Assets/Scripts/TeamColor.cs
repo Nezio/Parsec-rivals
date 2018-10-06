@@ -8,6 +8,8 @@ public class TeamColor : MonoBehaviour
     
     [Tooltip("Team 1 or team 2")]
     public int team;
+    [Tooltip("Saturation: 0 - 100")]
+    public int saturation = 0;
 
     [HideInInspector]
     public Color[] teamColors = new Color[2];
@@ -26,8 +28,17 @@ public class TeamColor : MonoBehaviour
         SpriteRenderer sprite = gameObject.GetComponent<SpriteRenderer>();
         Image image = gameObject.GetComponent<Image>();
         Text text = gameObject.GetComponent<Text>();
+        Outline outline = gameObject.GetComponent<Outline>();
 
-        if(sprite != null)
+        // saturation
+        if(saturation != 0)
+        {
+            teamColors[0] = Desaturate(teamColors[0], saturation);
+            teamColors[1] = Desaturate(teamColors[1], saturation);
+        }
+        
+
+        if (sprite != null)
         {
             sprite.color = teamColors[team];
         }
@@ -39,7 +50,28 @@ public class TeamColor : MonoBehaviour
         {
             text.color = teamColors[team];
         }
+        if(outline != null)
+        {
+            outline.effectColor = new Color(teamColors[team].r, teamColors[team].g, teamColors[team].b, outline.effectColor.a);
+        }
         
+    }
+
+    private Color Desaturate(Color color, float amount)
+    {
+        if (amount < 0)
+            amount = 0;
+        if (amount > 100)
+            amount = 100;
+
+        amount = amount / 100;
+
+        float H, S, V;
+
+        Color.RGBToHSV(color, out H, out S, out V);
+        S = S * amount;
+
+        return Color.HSVToRGB(H, S, V);
     }
 
 }

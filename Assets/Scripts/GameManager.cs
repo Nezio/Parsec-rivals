@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject Ball;
     public GameObject player1;
     public GameObject player2;
+
+    [Tooltip("Reference to any game object that has TeamColor script attached.")]
+    public TeamColor teamColor;
     
     // UI
     public Text team1ScoreText;
@@ -26,12 +29,14 @@ public class GameManager : MonoBehaviour
     private int team2Score = 0;
     private GameObject[] playerSpawnPoints;
     private bool overtime = false;
+    private PaintOnGoal[] paintableOnGoal;
     
 
     private void Start()
     {
         // initialization
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
+        paintableOnGoal = FindObjectsOfType<PaintOnGoal>();
 
         StartRound();
 
@@ -41,13 +46,12 @@ public class GameManager : MonoBehaviour
     {
         ResetBall();
         ResetPlayers();
-        
-        // clean up playing field (of bullets, powerups, etc.)
-        CleanUpField();
+        CleanUpField();         // clean up playing field (of bullets, powerups, etc.)
+        ResetFieldColors();     // reset
 
         // pause game, play countdown animation and unpause game
         StartCoroutine(Countdown());
-   
+        
     }
 
     private void ResetBall()
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
         Ball.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
         Ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         Ball.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        Ball.SetActive(true);
     }
 
     private void ResetPlayers()
@@ -111,23 +116,58 @@ public class GameManager : MonoBehaviour
             team2Players[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
         }
     }
+
+    private void ResetFieldColors()
+    {
+        foreach (PaintOnGoal p in paintableOnGoal)
+        {
+            p.reset = true;
+        }
+    }
     
-    public void Goal(int teamWhoScored)
+    public void ScoreGoal(int teamWhoScored)
+    {
+        teamWhoScored--;    // normalize for use in arrays
+        StartCoroutine(Goal(teamWhoScored));
+    }
+
+    private IEnumerator Goal(int teamWhoScored)
     {   // goal has been detected
-        // this function is called from BallCollisionCheck when ball detects a goal
+        // this corutone is called from BallCollisionCheck when ball detects a goal
+        // corutines can be called from other scripts, but game object calling it has to remain active (ball isn't after hitting a goal collider)
         
         UpdateScores(teamWhoScored);
 
         // pause timer only
         matchTimer.pauseTimer = true;
 
-        // score animations and slowdown
+        // score animations and visuals
+        PaintOnGoal(teamColor.teamColors[teamWhoScored]);
 
+        // and slowdown
+        while (Time.timeScale > 0.35)
+        {
+            Time.timeScale -= 0.1f;
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+        yield return new WaitForSecondsRealtime(3.5f);
+
+        // overtime or new round
         if (overtime)
             EndMatch();
         else
             StartRound();   // start new round
     }
+
+    private void PaintOnGoal(Color color)
+    {
+        foreach(PaintOnGoal p in paintableOnGoal)
+        {
+            p.reset = false;
+            StartCoroutine(p.Paint(color));
+        }
+    }
+
 
     private void UpdateScores(int teamWhoScored)
     {
@@ -162,7 +202,7 @@ public class GameManager : MonoBehaviour
         matchTimer.pauseTimer = false;  // unpause timer (timer starts paused to prevent 04:59 on start)
     }
 
-    IEnumerator Countdown()
+    private IEnumerator Countdown()
     { // pause game, play countdown animation and unpause game
         countdown.SetActive(true);      // enable animation gameobject
         PauseGame();                    // pause game (animation won't stop because it's using unscaled time)

@@ -60,7 +60,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballHitForce: 50
+  particleExplosionPrefab: {fileID: 1788909042781794, guid: c5bc0a6588905bc4ca486f2dfb33b048,
+    type: 2}
 --- !u!212 &212097981799872792
 SpriteRenderer:
   m_ObjectHideFlags: 1

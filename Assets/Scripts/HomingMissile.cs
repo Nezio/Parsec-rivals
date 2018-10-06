@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HomingMissile : MonoBehaviour
 {
-    public Transform target;
+    public Transform target = null;
 
     public float speed = 5f;
     public float rotateSpeed = 200f;
@@ -14,18 +14,37 @@ public class HomingMissile : MonoBehaviour
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Ball").transform;
+
+        try
+        {
+            target = GameObject.FindGameObjectWithTag("Ball").transform;
+        }
+        catch
+        {
+            target = null;
+        }
+
+        
     }
 
     private void FixedUpdate()
     {
-        Vector2 direction = (Vector2)target.position - rb.position;
-        direction.Normalize();
+        //Debug.Log(target);
+        if(target != null)
+        {
+            Vector2 direction = (Vector2)target.position - rb.position;
+            direction.Normalize();
 
-        float rotateAmount = Vector3.Cross(direction, transform.up).z;
+            float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
-        rb.angularVelocity = -rotateAmount * rotateSpeed;
-        rb.velocity = transform.up * speed;
+            rb.angularVelocity = -rotateAmount * rotateSpeed;
+            rb.velocity = transform.up * speed;
+        }
+        else
+        {
+            rb.velocity = transform.up * speed;
+        }
+        
     }
 
 }
