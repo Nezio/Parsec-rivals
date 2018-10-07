@@ -1291,7 +1291,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 0}
+  m_BackGroundColor: {r: 0.03, g: 0.03, b: 0.03, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -7069,7 +7069,7 @@ MonoBehaviour:
   scoresScreenScore1: {fileID: 2017692677}
   scoresScreenScore2: {fileID: 870997481}
   scoresScreen: {fileID: 811155565}
-  countingDown: 0
+  matchInProgress: 0
 --- !u!1 &1180522570
 GameObject:
   m_ObjectHideFlags: 0
@@ -7186,6 +7186,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseScreen: {fileID: 1234750423}
   gameManager: {fileID: 1115314287}
+  UIEventHndl: {fileID: 1531673945}
+  previousTimeScale: 1
 --- !u!1 &1227404309
 GameObject:
   m_ObjectHideFlags: 0
@@ -8057,6 +8059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1115314287}
   pauseScreen: {fileID: 1234750423}
+  UICtrl: {fileID: 1194271372}
 --- !u!1 &1606281447
 GameObject:
   m_ObjectHideFlags: 0

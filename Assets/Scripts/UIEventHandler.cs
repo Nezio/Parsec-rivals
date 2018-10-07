@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIEventHandler : MonoBehaviour
-{
+{ // used to respond to UI events (like button clicks)
     public GameManager gameManager;
     public GameObject pauseScreen;
+    public UIController UICtrl;
 
     public void ExitGame()
     {
@@ -24,5 +25,6 @@ public class UIEventHandler : MonoBehaviour
     {
         pauseScreen.SetActive(false);
         gameManager.UnpauseGame();
+        Time.timeScale = UICtrl.previousTimeScale;
     }
 }

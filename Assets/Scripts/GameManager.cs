@@ -23,13 +23,14 @@ public class GameManager : MonoBehaviour
     public GameObject scoresScreen;
 
     [HideInInspector]
-    public bool countingDown = false;
+    public bool matchInProgress = false;    // property to let other scripts know that match is in progress; false during countdown and after goal
 
     private int team1Score = 0;
     private int team2Score = 0;
     private GameObject[] playerSpawnPoints;
     private bool overtime = false;
     private PaintOnGoal[] paintableOnGoal;
+    private GameObject[] allPlayers;
     
 
     private void Start()
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         // initialization
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
         paintableOnGoal = FindObjectsOfType<PaintOnGoal>();
+        allPlayers = GameObject.FindGameObjectsWithTag("Player");
 
         StartRound();
 
@@ -114,7 +116,16 @@ public class GameManager : MonoBehaviour
             // reset angular velocity
             team1Players[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
             team2Players[i].GetComponent<Rigidbody2D>().angularVelocity = 0;
+            
         }
+
+        // reset collision setting - this must be done because of Unity's IgnoreCollision function
+        // https://docs.unity3d.com/ScriptReference/Physics2D.IgnoreCollision.html
+        foreach(GameObject player in allPlayers)
+        {
+            player.GetComponent<PlayerController>().SetPlayerBallCollision();
+        }
+
     }
 
     private void ResetFieldColors()
@@ -127,7 +138,6 @@ public class GameManager : MonoBehaviour
     
     public void ScoreGoal(int teamWhoScored)
     {
-        teamWhoScored--;    // normalize for use in arrays
         StartCoroutine(Goal(teamWhoScored));
     }
 
@@ -135,14 +145,15 @@ public class GameManager : MonoBehaviour
     {   // goal has been detected
         // this corutone is called from BallCollisionCheck when ball detects a goal
         // corutines can be called from other scripts, but game object calling it has to remain active (ball isn't after hitting a goal collider)
-        
+
+        matchInProgress = false;
         UpdateScores(teamWhoScored);
 
         // pause timer only
         matchTimer.pauseTimer = true;
 
         // score animations and visuals
-        PaintOnGoal(teamColor.teamColors[teamWhoScored]);
+        PaintOnGoal(teamColor.teamColors[teamWhoScored - 1]);       // -1 because of array
 
         // and slowdown
         while (Time.timeScale > 0.35)
@@ -206,7 +217,6 @@ public class GameManager : MonoBehaviour
     { // pause game, play countdown animation and unpause game
         countdown.SetActive(true);      // enable animation gameobject
         PauseGame();                    // pause game (animation won't stop because it's using unscaled time)
-        countingDown = true;            // property to let other scripts know that countdown is in progress
         
         Animator anmtr = countdown.GetComponent<Animator>();    // get animation length
         var animLength = anmtr.GetCurrentAnimatorStateInfo(0).length;
@@ -217,7 +227,7 @@ public class GameManager : MonoBehaviour
 
         countdown.SetActive(false);     // disable animation gameobject
         UnpauseGame();                  // unneeded, but just in case; animation unpauses game
-        countingDown = false;
+        matchInProgress = true;
     }
 
     private void CleanUpField()
@@ -226,6 +236,11 @@ public class GameManager : MonoBehaviour
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
         {
             Destroy(bullet);
+        }
+        // clean up particles
+        foreach (GameObject particle in GameObject.FindGameObjectsWithTag("Particle"))
+        {
+            Destroy(particle);
         }
     }
 

@@ -29,8 +29,13 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>(), !collideWithBall);
+        SetPlayerBallCollision();
         animtr = gameObject.GetComponent<Animator>();
+    }
+
+    public void SetPlayerBallCollision()
+    {
+        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>(), !collideWithBall);
     }
 
     private void Update()

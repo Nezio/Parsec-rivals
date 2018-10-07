@@ -6,18 +6,23 @@ public class UIController : MonoBehaviour
 {
     public GameObject pauseScreen;
     public GameManager gameManager;
+    public UIEventHandler UIEventHndl;
 
+    [HideInInspector]
+    public float previousTimeScale = 1;
+    
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && !gameManager.countingDown)
+    { // used to controll player input in regard to UI events
+
+        if (Input.GetKeyDown(KeyCode.Escape) && gameManager.matchInProgress)
         {
             if(pauseScreen.activeSelf)
             { // already paused; unpause it
-                gameManager.UnpauseGame();
-                pauseScreen.SetActive(false);
+                UIEventHndl.Resume();
             }
             else
             { // pause
+                previousTimeScale = Time.timeScale;
                 gameManager.PauseGame();
                 pauseScreen.SetActive(true);
             }
