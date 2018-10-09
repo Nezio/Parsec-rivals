@@ -1553,9 +1553,14 @@ MonoBehaviour:
     volume: 1
     loop: 0
     source: {fileID: 0}
-  - name: Boost
+  - name: BoostP1
     clip: {fileID: 8300000, guid: 179c81e025fa3aa4581a616630f381d2, type: 3}
-    volume: 1
+    volume: 0.42
+    loop: 0
+    source: {fileID: 0}
+  - name: BoostP2
+    clip: {fileID: 8300000, guid: 179c81e025fa3aa4581a616630f381d2, type: 3}
+    volume: 0.42
     loop: 0
     source: {fileID: 0}
   - name: BulletExplode1

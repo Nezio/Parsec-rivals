@@ -35,10 +35,41 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    public void PlayOneShot(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s != null)
+        {
+            s.source.PlayOneShot(s.source.clip);
+        }
+        else
+        {
+            Debug.LogWarning("Sound: '" + name + "' not found!");
+        }
+
+    }
+
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Stop();
+    }
+
+    public IEnumerator FadeOutStop(string name, float fadeTime)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        float decrement = 0.1f;
+        float waitTime = decrement * fadeTime;
+
+        while (s.source.volume > 0)
+        {
+            s.source.volume -= decrement;
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        s.source.Stop();
+        s.source.volume = s.volume;
     }
 
     public bool IsPlaying(string name)
