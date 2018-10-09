@@ -127,6 +127,7 @@ e1ea12ca952c81d81a9a21fdf34446ed UnityEngine.HoloLens.dll:UnityEngine.EventSyste
 dfd33ff9ae3ce8d7ca1f22b475ec2387 UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 96f3ea9f23b6f08e60710ebb4af49174 Unity.TextMeshPro.dll:TMPro.TMP_SpriteAsset
 6ab4907bf552e6877a53d14b3780f905 Assembly-CSharp.dll:.PaintOnGoal
+f141b2228afb14b75acf59689b3ad318 Assembly-CSharp.dll:.AudioManager
 980862481912ed869de409e344245b06 Assembly-CSharp.dll:.Anim_UnpauseGame
 f16835701e71dd5d6fb1fed4b7aff1d8 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 486cd95c82d8305219c352c06b776e1f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
@@ -175,4 +176,4 @@ e04611b8715e6833d2bd7010fc6be10b Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 9318334b30e9f195f573b2ce00154b95 Unity.TextMeshPro.dll:TMPro.TMP_ColorGradient
 112cd0bf1aa505567ac56111a2354729 Assembly-CSharp.dll:.UIController
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
-a987e379daf33595983ad61c3c03b03c Assembly-CSharp.dll:.HomingMissile
+4e1ebcf05e23a0c04e2d9c0532fed608 Assembly-CSharp.dll:.HomingMissile

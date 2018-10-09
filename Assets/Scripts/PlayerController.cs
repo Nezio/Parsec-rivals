@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float nextFire = 0;
     private Animator animtr;
+    private AudioManager audioManager;
 
     // Use this for initialization
     private void Start()
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         SetPlayerBallCollision();
         animtr = gameObject.GetComponent<Animator>();
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 
     public void SetPlayerBallCollision()
@@ -44,7 +46,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(Tools.GetKeycode(keyFire)) && nextFire < Time.time && Time.timeScale != 0)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.GetComponent<HomingMissile>().player = gameObject;   // set reference to this player in instanced bullet
+            GameObject.FindObjectOfType<AudioManager>().Play("Shoot");
         }
 
     }
@@ -62,13 +66,15 @@ public class PlayerController : MonoBehaviour
         { // forward
             rb.AddForce(transform.up * thrust);
 
-            // enable boost animation
-            animtr.SetBool("goingForward", true);
+            animtr.SetBool("goingForward", true);   // enable boost animation
+
+            //if(!audioManager.IsPlaying("Boost"))    // play audio
+            //    audioManager.Play("Boost");
         }
         else
         {
-            // disableboost animation
-            animtr.SetBool("goingForward", false);
+            animtr.SetBool("goingForward", false);  // disable boost animation
+            //audioManager.Stop("Boost");
         }
             
         if (Input.GetKey(Tools.GetKeycode(keyBackward)))

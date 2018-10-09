@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class TeamColor : MonoBehaviour
 { // attach this script to to elements that should be colored based on what team they belog to
     
-    [Tooltip("Team 1 or team 2")]
+    [Range(1, 2)]
     public int team;
-    [Tooltip("Saturation: 0 - 100")]
+    [Tooltip("If saturation is left at 0 it won't be changed")]
+    [Range(0, 100)]
     public int saturation = 0;
 
     [HideInInspector]

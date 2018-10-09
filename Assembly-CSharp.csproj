@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Auto Letterbox\ForceCameraRatio.cs" />
     <Compile Include="Assets\Scripts\Anim_UnpauseGame.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\AutoDestroyParticle.cs" />
     <Compile Include="Assets\Scripts\BallCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\BulletCollisionCheck.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\Scripts\MatchTimer.cs" />
     <Compile Include="Assets\Scripts\PaintOnGoal.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Scripts\TeamColor.cs" />
     <Compile Include="Assets\Scripts\Tools.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />

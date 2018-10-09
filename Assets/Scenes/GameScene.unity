@@ -248,7 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &84177567
 Prefab:
@@ -1141,7 +1141,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4071691773699150, guid: 2347dd6e4766ef64d976022b3dd622be, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1827857664556238, guid: 2347dd6e4766ef64d976022b3dd622be, type: 2}
       propertyPath: m_Name
@@ -1166,6 +1166,11 @@ Prefab:
         type: 2}
       propertyPath: m_Interpolate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114068031352783590, guid: 2347dd6e4766ef64d976022b3dd622be,
+        type: 2}
+      propertyPath: saturation
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2347dd6e4766ef64d976022b3dd622be, type: 2}
@@ -1515,6 +1520,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reset: 0
+--- !u!1 &777837209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777837211}
+  - component: {fileID: 777837210}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &777837210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 777837209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa419d5311e3264c8a86a5d53800538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Shoot
+    clip: {fileID: 8300000, guid: f64c3fee3f8b7924ca01d907ecfab6c3, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Boost
+    clip: {fileID: 8300000, guid: 179c81e025fa3aa4581a616630f381d2, type: 3}
+    volume: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BulletExplode1
+    clip: {fileID: 8300000, guid: 08ef49f4005638a40ba8f506eeff46bb, type: 3}
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+  - name: BulletExplode2
+    clip: {fileID: 8300000, guid: 88cbc3da94b98814ab25009215d0c3ed, type: 3}
+    volume: 0.3
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &777837211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 777837209}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.18699658, y: 0.073602416, z: -0.013671875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &784962452 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1827857664556238, guid: 2347dd6e4766ef64d976022b3dd622be,
@@ -1859,7 +1925,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1039543403
 GameObject:
@@ -8203,7 +8269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4071691773699150, guid: 2347dd6e4766ef64d976022b3dd622be, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1827857664556238, guid: 2347dd6e4766ef64d976022b3dd622be, type: 2}
       propertyPath: m_Name
@@ -8236,7 +8302,7 @@ Prefab:
     - target: {fileID: 114310887004656816, guid: 2347dd6e4766ef64d976022b3dd622be,
         type: 2}
       propertyPath: keyFire
-      value: Keypad0
+      value: RightControl
       objectReference: {fileID: 0}
     - target: {fileID: 114310887004656816, guid: 2347dd6e4766ef64d976022b3dd622be,
         type: 2}

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private bool overtime = false;
     private PaintOnGoal[] paintableOnGoal;
     private GameObject[] allPlayers;
+    private AudioManager audioManager;
     
 
     private void Start()
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
         paintableOnGoal = FindObjectsOfType<PaintOnGoal>();
         allPlayers = GameObject.FindGameObjectsWithTag("Player");
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
 
         StartRound();
 
@@ -49,7 +51,8 @@ public class GameManager : MonoBehaviour
         ResetBall();
         ResetPlayers();
         CleanUpField();         // clean up playing field (of bullets, powerups, etc.)
-        ResetFieldColors();     // reset
+        ResetFieldColors();
+        audioManager.StopAll(); // stop all sounds
 
         // pause game, play countdown animation and unpause game
         StartCoroutine(Countdown());

@@ -7,6 +7,13 @@ public class BulletCollisionCheck : MonoBehaviour
     public float ballHitForce;
     public GameObject particleExplosionPrefab;
 
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision);
@@ -15,6 +22,8 @@ public class BulletCollisionCheck : MonoBehaviour
         if(collision.gameObject.tag == "Ball")
         {
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * ballHitForce);
+
+            audioManager.Play("BulletExplode2");    // play audio
         }
 
         // if bullet collides with player ignore collision (don't destroy bullet)
@@ -32,6 +41,11 @@ public class BulletCollisionCheck : MonoBehaviour
 
         // play particle explosion
         Instantiate(particleExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+
+        // play audio
+        //int explodeSoundIndex = Random.Range(1, 3);
+        audioManager.Play("BulletExplode1");
+
 
         Destroy(gameObject);
     }
