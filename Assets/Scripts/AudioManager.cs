@@ -20,6 +20,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        foreach (Sound s in sounds)
+        {
+            if(!s.dontUseScaledTime)
+                s.source.pitch = Time.timeScale;
+        }
+    }
+
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -76,14 +85,6 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         return (s.source.isPlaying);
-    }
-
-    private void Update()
-    {
-        foreach (Sound s in sounds)
-        {
-            s.source.pitch = Time.timeScale;
-        }
     }
 
     public void StopAll()

@@ -5,6 +5,14 @@ using UnityEngine;
 public class BallCollisionCheck : MonoBehaviour
 {
     public GameManager gameManager;
+    public GameObject particleExplosionPrefab;
+
+    private AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,7 +21,7 @@ public class BallCollisionCheck : MonoBehaviour
         {
             gameManager.ScoreGoal(2);
 
-            gameObject.SetActive(false);
+            Goal();
         }
 
         // collided with goal2 -> team 1 scored
@@ -21,9 +29,19 @@ public class BallCollisionCheck : MonoBehaviour
         {
             gameManager.ScoreGoal(1);
 
-            gameObject.SetActive(false);
+            Goal();
         }
 
         
     }
+
+    private void Goal()
+    {
+        audioManager.PlayOneShot("Goal");
+
+        Instantiate(particleExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+
+        gameObject.SetActive(false);
+    }
+
 }

@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Anim_UnpauseGame.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\AutoDestroyParticle.cs" />
+    <Compile Include="Assets\Scripts\AutoDestroyParticleParent.cs" />
     <Compile Include="Assets\Scripts\BallCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\BulletCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

@@ -1550,27 +1550,56 @@ MonoBehaviour:
   sounds:
   - name: Shoot
     clip: {fileID: 8300000, guid: f64c3fee3f8b7924ca01d907ecfab6c3, type: 3}
-    volume: 1
+    volume: 0.6
+    dontUseScaledTime: 0
     loop: 0
     source: {fileID: 0}
   - name: BoostP1
     clip: {fileID: 8300000, guid: 179c81e025fa3aa4581a616630f381d2, type: 3}
     volume: 0.42
+    dontUseScaledTime: 0
     loop: 0
     source: {fileID: 0}
   - name: BoostP2
     clip: {fileID: 8300000, guid: 179c81e025fa3aa4581a616630f381d2, type: 3}
     volume: 0.42
+    dontUseScaledTime: 0
     loop: 0
     source: {fileID: 0}
-  - name: BulletExplode1
-    clip: {fileID: 8300000, guid: 08ef49f4005638a40ba8f506eeff46bb, type: 3}
+  - name: BulletExplode
+    clip: {fileID: 8300000, guid: ddf75b5b8f2e7714a88955cdda5ab1b6, type: 3}
     volume: 0.3
+    dontUseScaledTime: 0
     loop: 0
     source: {fileID: 0}
-  - name: BulletExplode2
-    clip: {fileID: 8300000, guid: 88cbc3da94b98814ab25009215d0c3ed, type: 3}
+  - name: BulletBallHit
+    clip: {fileID: 8300000, guid: 5c403ae807a1be54690cdd11af8f0506, type: 3}
     volume: 0.3
+    dontUseScaledTime: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Goal
+    clip: {fileID: 8300000, guid: 62425f28c59115e44b91806fbe5d477d, type: 3}
+    volume: 0.8
+    dontUseScaledTime: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Beep
+    clip: {fileID: 8300000, guid: ed8c2c20d760d1344b990512471f020f, type: 3}
+    volume: 0.8
+    dontUseScaledTime: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeepGo
+    clip: {fileID: 8300000, guid: e3296c67e7d9f40479e591fdbd110818, type: 3}
+    volume: 0.8
+    dontUseScaledTime: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BeepCountdown
+    clip: {fileID: 8300000, guid: 9feef2c9e32eef74c803dfa69acf0ef3, type: 3}
+    volume: 0.5
+    dontUseScaledTime: 1
     loop: 0
     source: {fileID: 0}
 --- !u!4 &777837211
@@ -7141,6 +7170,7 @@ MonoBehaviour:
   scoresScreenScore2: {fileID: 870997481}
   scoresScreen: {fileID: 811155565}
   matchInProgress: 0
+  overtime: 0
 --- !u!1 &1180522570
 GameObject:
   m_ObjectHideFlags: 0
@@ -8535,6 +8565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1115314287}
+  particleExplosionPrefab: {fileID: 100672, guid: 7dc0b63f67faaf9479803bcfdff7f71e,
+    type: 2}
 --- !u!1001 &1871966341
 Prefab:
   m_ObjectHideFlags: 0

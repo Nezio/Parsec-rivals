@@ -13,13 +13,15 @@ public class MatchTimer : MonoBehaviour
     private float currentTimerTime;       // current time to display on timer (in seconds)
     private Text timerText;
     private int pastTimerSecond;
+    private AudioManager audioManager;
 
     private void Start()
     {
         currentTimerTime = matchLength * 60;
-        //currentTimerTime = 6;      // debug
+        currentTimerTime = 15;      // debug
         timerText = gameObject.GetComponent<Text>();
         pastTimerSecond = (int)currentTimerTime;
+        audioManager = GameObject.FindObjectOfType<AudioManager>();
 
         UpdateTimeText();
         
@@ -84,5 +86,15 @@ public class MatchTimer : MonoBehaviour
             secondsText = seconds.ToString();
 
         timerText.text = minutesText + ":" + secondsText;
+
+        if(currentTimerTime<11 && !gameManager.overtime)
+        {
+            timerText.color = Tools.Color0to1(255, 88, 0);
+            audioManager.PlayOneShot("BeepCountdown");
+        }
+        else
+        {
+            timerText.color = Tools.Color0to1(255, 255, 255);
+        }
     }
 }

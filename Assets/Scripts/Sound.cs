@@ -12,6 +12,7 @@ public class Sound
     [Range(0, 1)]
     public float volume;
     //public float pitch;     // AudioManger sets pitch using timescale
+    public bool dontUseScaledTime;
 
     public bool loop;
 

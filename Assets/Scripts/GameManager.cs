@@ -24,11 +24,12 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool matchInProgress = false;    // property to let other scripts know that match is in progress; false during countdown and after goal
+    [HideInInspector]
+    public bool overtime = false;
 
     private int team1Score = 0;
     private int team2Score = 0;
     private GameObject[] playerSpawnPoints;
-    private bool overtime = false;
     private PaintOnGoal[] paintableOnGoal;
     private GameObject[] allPlayers;
     private AudioManager audioManager;
