@@ -64,7 +64,8 @@ public class PlayerController : MonoBehaviour
         { // forward
             forward = true;
 
-            animtr.SetBool("goingForward", true);       // enable boost animation
+            if(Time.timeScale != 0)
+                animtr.SetBool("goingForward", true);       // enable boost animation
 
             if(!audioManager.IsPlaying(boostSound))     // play audio
                 audioManager.Play(boostSound);          // TODO?: move audio to player prefab

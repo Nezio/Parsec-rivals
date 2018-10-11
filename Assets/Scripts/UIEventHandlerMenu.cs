@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIEventHandler : MonoBehaviour
-{ // used to respond to UI events (like button clicks)
-    public GameManager gameManager;
-    public GameObject pauseScreen;
-    public UIController UICtrl;
-
+public class UIEventHandlerMenu : MonoBehaviour
+{ // used to respond to UI events (like button clicks) in main and other menus
+    
     public void ExitGame()
     {
         Debug.Log("exit");
@@ -20,11 +17,9 @@ public class UIEventHandler : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
-
-    public void Resume()
+    
+    public void LoadScene(string name)
     {
-        pauseScreen.SetActive(false);
-        gameManager.UnpauseGame();
-        Time.timeScale = UICtrl.previousTimeScale;
+        SceneManager.LoadScene(name);
     }
 }

@@ -6,7 +6,7 @@ public class UIController : MonoBehaviour
 {
     public GameObject pauseScreen;
     public GameManager gameManager;
-    public UIEventHandler UIEventHndl;
+    public UIEventHandlerGame UIEventHndlGm;
 
     [HideInInspector]
     public float previousTimeScale = 1;
@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
         {
             if(pauseScreen.activeSelf)
             { // already paused; unpause it
-                UIEventHndl.Resume();
+                UIEventHndlGm.Resume();
             }
             else
             { // pause
