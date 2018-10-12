@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Ball;
+    public GameObject BallPrefab;
     public GameObject player1;
     public GameObject player2;
 
@@ -30,18 +30,25 @@ public class GameManager : MonoBehaviour
     private int team1Score = 0;
     private int team2Score = 0;
     private GameObject[] playerSpawnPoints;
+    private GameObject ballSpawnPoint;
+    private GameObject ball;
     private PaintOnGoal[] paintableOnGoal;
     private GameObject[] allPlayers;
     private AudioManager audioManager;
+    
     
 
     private void Start()
     {
         // initialization
         playerSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
+        ballSpawnPoint = GameObject.FindGameObjectWithTag("BallSpawnPoint");
+        ball = Instantiate(BallPrefab, ballSpawnPoint.transform.position, ballSpawnPoint.transform.rotation);
         paintableOnGoal = FindObjectsOfType<PaintOnGoal>();
         allPlayers = GameObject.FindGameObjectsWithTag("Player");
         audioManager = GameObject.FindObjectOfType<AudioManager>();
+        
+
 
         StartRound();
 
@@ -64,10 +71,10 @@ public class GameManager : MonoBehaviour
     {
         // reset ball position and velocity
         //Ball.transform.SetPositionAndRotation(ballSpawnPoint.transform.position, ballSpawnPoint.transform.rotation);  // previously used ball spawn point system
-        Ball.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
-        Ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-        Ball.GetComponent<Rigidbody2D>().angularVelocity = 0;
-        Ball.SetActive(true);
+        ball.transform.SetPositionAndRotation(new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0));
+        ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        ball.GetComponent<Rigidbody2D>().angularVelocity = 0;
+        ball.SetActive(true);
     }
 
     private void ResetPlayers()

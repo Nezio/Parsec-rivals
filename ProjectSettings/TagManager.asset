@@ -11,6 +11,7 @@ TagManager:
   - BallSpawnPoint
   - Bullet
   - Particle
+  - MapSelector
   layers:
   - Default
   - TransparentFX

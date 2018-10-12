@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class BallCollisionCheck : MonoBehaviour
 {
-    public GameManager gameManager;
     public GameObject particleExplosionPrefab;
 
+    private GameManager gameManager;
     private AudioManager audioManager;
 
     private void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         audioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 

@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public GameObject ball;
     public bool collideWithBall;
     public GameManager gameManager;
 
@@ -37,7 +36,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        SetPlayerBallCollision();
         animtr = gameObject.GetComponent<Animator>();
         audioManager = GameObject.FindObjectOfType<AudioManager>();
         playerID = gameObject.name.Substring(8, 1);
@@ -46,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetPlayerBallCollision()
     {
-        Physics2D.IgnoreCollision(ball.GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>(), !collideWithBall);
+        Physics2D.IgnoreCollision(GameObject.FindGameObjectWithTag("Ball").GetComponent<Collider2D>(), this.gameObject.GetComponent<Collider2D>(), !collideWithBall);
     }
 
     private void Update()
