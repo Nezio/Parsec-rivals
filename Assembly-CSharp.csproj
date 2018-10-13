@@ -73,6 +73,8 @@
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HomingMissile.cs" />
+    <Compile Include="Assets\Scripts\MapSettings.cs" />
+    <Compile Include="Assets\Scripts\MatchSettings.cs" />
     <Compile Include="Assets\Scripts\MatchTimer.cs" />
     <Compile Include="Assets\Scripts\PaintOnGoal.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />

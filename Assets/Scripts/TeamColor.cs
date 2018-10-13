@@ -13,7 +13,7 @@ public class TeamColor : MonoBehaviour
     public int saturation = 0;
 
     [HideInInspector]
-    public Color[] teamColors = new Color[2];
+    public static Color[] teamColors = new Color[2];
 
     private void Start()
     {

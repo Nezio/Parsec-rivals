@@ -18,7 +18,7 @@ public class MatchTimer : MonoBehaviour
     private void Start()
     {
         currentTimerTime = matchLength * 60;
-        //currentTimerTime = 15;      // debug
+        currentTimerTime = 15;      // debug
         timerText = gameObject.GetComponent<Text>();
         pastTimerSecond = (int)currentTimerTime;
         audioManager = GameObject.FindObjectOfType<AudioManager>();

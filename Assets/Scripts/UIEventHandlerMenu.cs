@@ -11,8 +11,6 @@ public class UIEventHandlerMenu : MonoBehaviour
     public GameObject mapSelector;
     public Image mapSelectButtonImage;
 
-    private string mapToLoad = "Map1";
-
     public void ExitGame()
     {
         Debug.Log("exit");
@@ -40,18 +38,15 @@ public class UIEventHandlerMenu : MonoBehaviour
 
     public void SetMapToLoad(string map)
     { // buttons in map selector screen call this
-        mapToLoad = map;
-        Debug.Log(map);
 
+        MatchSettings.mapToLoad = map;  // set map to load; game manager reads this in his Awake
+
+        // set image of selected map to be visible in lobby
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
         mapSelectButtonImage.sprite = clickedButton.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Image>().sprite;
         
-        mapSelector.SetActive(false);
-    }
-
-    public void LoadSetMap()
-    { // start button calls this
-        LoadScene(mapToLoad);
+        mapSelector.SetActive(false);   // disable map selector screen after selecting a map
+        
     }
 
     public void ShowMapSelector()

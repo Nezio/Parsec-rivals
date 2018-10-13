@@ -8,9 +8,6 @@ public class GameManager : MonoBehaviour
     public GameObject BallPrefab;
     public GameObject player1;
     public GameObject player2;
-
-    [Tooltip("Reference to any game object that has TeamColor script attached.")]
-    public TeamColor teamColor;
     
     // UI
     public Text team1ScoreText;
@@ -35,8 +32,21 @@ public class GameManager : MonoBehaviour
     private PaintOnGoal[] paintableOnGoal;
     private GameObject[] allPlayers;
     private AudioManager audioManager;
-    
-    
+
+    private void Awake()
+    {
+        // instantiate map
+        Instantiate(Resources.Load("Maps/" + MatchSettings.mapToLoad));
+
+        MapSettings mapSettings = GameObject.FindObjectOfType<MapSettings>();   // get reference to map settings where camera settings are saved
+
+        // set camera settings
+        GameObject cameraGO = GameObject.FindGameObjectWithTag("MainCamera");
+        Camera camera = cameraGO.GetComponent<Camera>();
+        camera.orthographicSize = mapSettings.camSize;  // set camera size
+        cameraGO.transform.position = new Vector3(mapSettings.camPosX, mapSettings.camPosY, mapSettings.camPosZ);   // set camera position
+
+    }
 
     private void Start()
     {
@@ -164,7 +174,7 @@ public class GameManager : MonoBehaviour
         matchTimer.pauseTimer = true;
 
         // score animations and visuals
-        PaintOnGoal(teamColor.teamColors[teamWhoScored - 1]);       // -1 because of array
+        PaintOnGoal(TeamColor.teamColors[teamWhoScored - 1]);       // -1 because of array
 
         // and slowdown
         while (Time.timeScale > 0.35)
