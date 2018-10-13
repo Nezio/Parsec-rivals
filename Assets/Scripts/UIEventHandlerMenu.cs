@@ -59,4 +59,5 @@ public class UIEventHandlerMenu : MonoBehaviour
         mapSelector.SetActive(true);
         //Debug.Log(GameObject.FindGameObjectWithTag("MapSelector").name;
     }
+    
 }

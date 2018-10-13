@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\AutoDestroyParticleParent.cs" />
     <Compile Include="Assets\Scripts\BallCollisionCheck.cs" />
     <Compile Include="Assets\Scripts\BulletCollisionCheck.cs" />
+    <Compile Include="Assets\Scripts\ButtonSounds.cs" />
     <Compile Include="Assets\Scripts\ButtonStartSelected.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

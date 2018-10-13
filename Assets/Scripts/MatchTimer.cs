@@ -87,14 +87,41 @@ public class MatchTimer : MonoBehaviour
 
         timerText.text = minutesText + ":" + secondsText;
 
-        if(currentTimerTime<11 && !gameManager.overtime)
+        // 30 sec. warning
+        if((int)currentTimerTime == 30)
+            StartCoroutine(warning30sec());
+
+        // 10 to 0 countdown sounds and color
+        if(!gameManager.overtime)
         {
-            timerText.color = Tools.Color0to1(255, 88, 0);
-            audioManager.PlayOneShot("BeepCountdown");
+            // paint orange on 30 sec. left
+            if((int)currentTimerTime == 30)
+                timerText.color = Tools.Color0to1(255, 88, 0);
+            if ((int)currentTimerTime == 29)
+                timerText.color = Tools.Color0to1(255, 255, 255);
+            
+            if ((int)currentTimerTime < 11 && (int)currentTimerTime > 3)
+            {
+                audioManager.PlayOneShot("BeepCountdown");
+                timerText.color = Tools.Color0to1(255, 88, 0);
+            }
+            else if((int)currentTimerTime < 4)
+            {
+                audioManager.PlayOneShot("BeepCountdown2");
+                timerText.color = Tools.Color0to1(255, 88, 0);
+            }
+            
         }
         else
         {
             timerText.color = Tools.Color0to1(255, 255, 255);
         }
+    }
+
+    private IEnumerator warning30sec()
+    {
+        audioManager.PlayOneShot("BeepCountdown");
+        yield return new WaitForSeconds(0.2f);
+        audioManager.PlayOneShot("BeepCountdown");
     }
 }

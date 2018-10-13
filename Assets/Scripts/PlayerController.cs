@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
         audioManager = GameObject.FindObjectOfType<AudioManager>();
         playerID = gameObject.name.Substring(8, 1);
         boostSound = "BoostP" + playerID;
+
     }
 
     public void SetPlayerBallCollision()

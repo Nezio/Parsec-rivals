@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 222341834791946096}
   - component: {fileID: 114824970686963578}
   - component: {fileID: 114147988911048880}
+  - component: {fileID: 114626464635363182}
   m_Layer: 5
   m_Name: ImageButtonSmall
   m_TagString: Untagged
@@ -122,6 +123,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114626464635363182
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057280778924360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111f23cc49447cb41adc392d5611e252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114776397785332548
 MonoBehaviour:
   m_ObjectHideFlags: 1
